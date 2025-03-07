@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>翻牌遊戲</title>
+    <style>
+        body{
+            background-color: bisque;
+        }
+        .title{
+            width: 400px;
+            height: 30px;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+      .board {
+        margin-left: auto;
+        margin-right: auto;
+        display: grid;
+        grid-template-columns: repeat(8, 80px);
+        grid-template-rows: repeat(4, 80px);
+        gap: 8px;
+        width: 70px;
+      }
+      .piece{
+        width: 80px;
+        height: 80px;
+        background-color: burlywood;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .piece img{
+        width: 100%;
+        height: 100%;
+        display: none;
+      }
+      .revealed img{
+        display: block;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="title">
+        <h1>歡迎來到暗棋實作</h1>
+    </div>
+    <div class="board" id="board"></div>
+    <script>
+      const pieceImages = {
+        "./game/general.png": 1,
+        "./game/advisor.png": 2,
+        "./game/elephant.png": 2,
+        "./game/horse.png": 2,
+        "./game/chariot.png": 2,
+        "./game/cannon.png": 2,
+        "./game/soldier.png": 5,
+        "./game/general1.png": 1,
+        "./game/advisor1.png": 2,
+        "./game/elephant1.png": 2,
+        "./game/chariot1.png": 2,
+        "./game/horse1.png": 2,
+        "./game/cannon1.png": 2,
+        "./game/soldier1.png": 5,
+      };
+      const board = document.getElementById("board");
+      let pieces = [];
+
+      for(let img in pieceImages){
+        for( let i = 0 ; i < pieceImages[img] ; i++){
+            pieces.push(img)
+        }
+      }
+      pieces.sort(() => Math.random() - 0.5);
+
+      for(let i=0;i<32;i++){
+        let div=document.createElement("div");
+        div.classList.add("piece");
+
+        let img =document.createElement("img");
+        img.src=pieces[i];
+        div.appendChild(img);
+
+        div.addEventListener("click",function (){
+            div.classList.add("revealed");
+        });
+
+        board.appendChild(div);
+      }
+
+
+
+
+
+    </script>
+    
+  </body>
+</html>
